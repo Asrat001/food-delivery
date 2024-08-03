@@ -23,7 +23,8 @@ class HomeState extends Equatable {
     List<Restaurant>? popularRestaurants,
     List<Restaurant>? featuredRestaurants,
     List<dynamic>? shopsNearby,
-  }) {
+  })
+   {
     return HomeState(
       status: status ?? this.status,
       foodCategories: foodCategories ?? this.foodCategories,
@@ -31,7 +32,7 @@ class HomeState extends Equatable {
       featuredRestaurants: featuredRestaurants ?? this.featuredRestaurants,
       shopsNearby: shopsNearby ?? this.shopsNearby,
     );
-  }
+  } 
 
   @override
   List<Object?> get props => [

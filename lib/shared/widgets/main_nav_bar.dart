@@ -21,16 +21,16 @@ class MainNavBar extends StatelessWidget {
       onTap: (index) {
         switch (index) {
           case 0:
-            context.pushNamed('home');
+            Navigator.pushNamed(context, '/');
             break;
           case 1:
-            context.pushNamed('search');
+            Navigator.pushNamed(context, '/search');
             break;
           case 2:
-            context.pushNamed('cart');
+            Navigator.pushNamed(context, '/cart');
             break;
           case 3:
-            context.pushNamed('user-account');
+            Navigator.pushNamed(context, '/account');
             break;
           default:
         }

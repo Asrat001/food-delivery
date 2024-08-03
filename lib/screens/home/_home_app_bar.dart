@@ -1,7 +1,15 @@
 part of 'home_screen.dart';
 
-class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
+class _HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
   const _HomeAppBar();
+  @override
+  Size get preferredSize => const Size.fromHeight(128.0);
+  @override
+  State<_HomeAppBar> createState() => _HomeAppBarState();
+}
+
+class _HomeAppBarState extends State<_HomeAppBar> {
+  late Position _currentPosition;
 
   @override
   Widget build(BuildContext context) {
@@ -9,30 +17,38 @@ class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return AppBar(
+      systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.white30, statusBarBrightness: Brightness.dark),
       toolbarHeight: 80.0,
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Deliver now',
-            style: textTheme.bodyLarge,
-          ),
-          Row(
-            children: [
-              Text(
-                'Your location',
-                style: textTheme.bodyLarge!.copyWith(
-                  fontWeight: FontWeight.bold,
+      title: TextButton(
+        onPressed: () => {
+          Utils.showDialogBox(context, "Where is your delivery Address",
+              () => {getCurrentLocation()})
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Deliver now',
+              style: textTheme.bodyLarge,
+            ),
+            Row(
+              children: [
+                Text(
+                  'Your location',
+                  style: textTheme.bodyLarge!.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              Icon(
-                Icons.expand_more,
-                color: colorScheme.onBackground,
-              ),
-            ],
-          ),
-        ],
+                Icon(
+                  Icons.expand_more,
+                  color: colorScheme.onBackground,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
       actions: [
         Switch(
@@ -64,6 +80,17 @@ class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  @override
-  Size get preferredSize => const Size.fromHeight(128.0);
+  getCurrentLocation() {
+    print("hey");
+    Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.best,
+            forceAndroidLocationManager: true)
+        .then((Position position) {
+      setState(() {
+        _currentPosition = position;
+      });
+    }).catchError((e) {
+      print(e);
+    });
+  }
 }

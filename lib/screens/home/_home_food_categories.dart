@@ -10,7 +10,7 @@ class _FoodCategories extends StatelessWidget {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         return Row(
-          children: state.foodCategories.take(7).map(
+          children: state.foodCategories.take(5).map(
             (category) {
               return Expanded(
                 child: GestureDetector(

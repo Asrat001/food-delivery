@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "527871665604",
+    "project_id": "deliveryakilo",
+    "storage_bucket": "deliveryakilo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527871665604:android:f266a07b7372c3893ef091",
+        "android_client_info": {
+          "package_name": "com.example.food_ordering_app_with_flutter_and_bloc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527871665604-bphr19ncfvcinb1534npc5ms6evnffo8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.food_ordering_app_with_flutter_and_bloc",
+            "certificate_hash": "056f207c2499ae9bdb102d74b1705ac129d633da"
+          }
+        },
+        {
+          "client_id": "527871665604-s4p1215rnir3tnlpljf43q7asqfefugj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmATwyjEgJDkqf5kR5vLudrtIib4q3g5c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527871665604-s4p1215rnir3tnlpljf43q7asqfefugj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
