@@ -16,4 +16,10 @@ class FirestoreService {
       throw Exception('Error saving user to Firestore: $e');
     }
   }
+Future <void> seedDataBase(List<dynamic> arr) async{
+arr.forEach((restaurant) async => {
+  await  _firestore.collection("restaurants").add(restaurant)
+});
+}
+
 }

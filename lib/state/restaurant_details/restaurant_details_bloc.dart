@@ -24,6 +24,7 @@ class RestaurantDetailsBloc
     Emitter<RestaurantDetailsState> emit,
   ) async {
     debugPrint('LoadRestaurantDetailsEvent');
+     debugPrint(event.restaurantId);
     emit(state.copyWith(status: RestaurantDetailsStatus.loading));
     try {
       final restaurant = await _restaurantRepository.fetchRestaurant(

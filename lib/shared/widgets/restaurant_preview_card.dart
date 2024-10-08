@@ -1,5 +1,6 @@
 import 'package:core/entities.dart';
 import 'package:flutter/material.dart';
+import 'package:food_ordering_app_with_flutter_and_bloc/shared/widgets/network_Image_withloading.dart';
 
 import '../../screens/restaurant_details/restaurant_details_screen.dart';
 
@@ -43,12 +44,7 @@ class RestaurantPreviewCard extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
-                  child: Image.network(
-                    restaurant.imageUrl!,
-                    height: 125,
-                    width: size.width,
-                    fit: BoxFit.cover,
-                  ),
+                  child:NetworkImageWithLoading(imageUrl: restaurant.imageUrl!, width:size.width, height: 120),
                 ),
                 Positioned(
                   left: 8.0,

@@ -9,7 +9,14 @@ class _HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _HomeAppBarState extends State<_HomeAppBar> {
-  late Position _currentPosition;
+  late Position? _currentPosition;
+  late String? locationAddress = "no Address";
+
+  @override
+  void initState() {
+    getCurrentLocation();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +37,13 @@ class _HomeAppBarState extends State<_HomeAppBar> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Deliver now',
+              'Delivery  location',
               style: textTheme.bodyLarge,
             ),
             Row(
               children: [
                 Text(
-                  'Your location',
+                  ' ${locationAddress!}',
                   style: textTheme.bodyLarge!.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -80,17 +87,65 @@ class _HomeAppBarState extends State<_HomeAppBar> {
     );
   }
 
-  getCurrentLocation() {
-    print("hey");
-    Geolocator.getCurrentPosition(
-            desiredAccuracy: LocationAccuracy.best,
-            forceAndroidLocationManager: true)
-        .then((Position position) {
-      setState(() {
-        _currentPosition = position;
-      });
-    }).catchError((e) {
-      print(e);
-    });
+  Future<void> getCurrentLocation() async {
+    final status = await Permission.location.request();
+    if (status.isGranted) {
+      try {
+        final position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high,
+          forceAndroidLocationManager: true,
+        );
+        if (mounted) {
+      
+          setState(() {
+            _currentPosition = position;
+          });
+          getAddressFromLatLng(
+            _currentPosition?.latitude,
+            _currentPosition?.longitude,
+          );
+        }
+      } catch (e) {
+        print('Error getting location: $e');
+      }
+    } else if (status.isDenied) {
+      print('Location permission denied');
+    }
+  }
+
+  Future<void> getAddressFromLatLng(double? lat, double? lng) async {
+    if (lat == null || lng == null) return;
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(lat, lng);
+      if (placemarks.isNotEmpty) {
+        final place = placemarks[0];
+        final address = "${place.street}, ${place.subLocality}";
+        if (mounted) {
+          setState(() {
+            locationAddress = address;
+          });
+              context.read<OrderBloc>().add(AddLocationEvent(location: address
+              ));
+        }
+      } else {
+        if (mounted) {
+          setState(() {
+            locationAddress = "No address found";
+          });
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          locationAddress = "No address found";
+        });
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    // Clean up any resources if needed
+    super.dispose();
   }
 }

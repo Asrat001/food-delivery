@@ -69,12 +69,7 @@ class FeaturedMenuItemCard extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(
-                  menuItem.imageUrl!,
-                  height: 125,
-                  width: size.width,
-                  fit: BoxFit.cover,
-                ),
+                child:NetworkImageWithLoading(imageUrl:menuItem.imageUrl!,width: size.width,height: 125),
               ),
               Positioned(
                 right: 4.0,

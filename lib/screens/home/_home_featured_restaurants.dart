@@ -14,7 +14,7 @@ class _FeaturedRestaurants extends StatelessWidget {
         return Column(
           children: [
             SectionTitle(
-              title: 'Featured on Akilo',
+              title: 'Featured on Nayna',
               action: 'See all',
               onPressed: () {},
             ),

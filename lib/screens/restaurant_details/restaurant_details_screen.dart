@@ -1,10 +1,12 @@
 import 'package:core/entities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_ordering_app_with_flutter_and_bloc/shared/widgets/network_Image_withloading.dart';
 
 import '../../repositories/restaurant_repository.dart';
 import '../../shared/widgets/section_title.dart';
 import '../../state/restaurant_details/restaurant_details_bloc.dart';
+import 'package:food_ordering_app_with_flutter_and_bloc/shared/widgets/menu_card.dart';
 
 part '_restaurant_details_app_bar.dart';
 part '_restaurant_details_information.dart';
@@ -37,6 +39,7 @@ class RestaurantDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const _RestaurantDetailsAppBar(),
+      resizeToAvoidBottomInset: true,
       body: BlocBuilder<RestaurantDetailsBloc, RestaurantDetailsState>(
         builder: (context, state) {
           if (state.status == RestaurantDetailsStatus.initial ||

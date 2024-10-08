@@ -27,10 +27,7 @@ class _RestaurantDetailsAppBar extends StatelessWidget
         fit: StackFit.expand,
         children: [
           (restaurant?.imageUrl != null)
-              ? Image.network(
-                  (restaurant?.imageUrl)!,
-                  fit: BoxFit.cover,
-                )
+              ? NetworkImageWithLoading(imageUrl:restaurant!.imageUrl!)
               : const SizedBox(),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,

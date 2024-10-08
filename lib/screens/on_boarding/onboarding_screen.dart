@@ -66,15 +66,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 }),
           ),
           DotIndictorView(
-              pageController: _pageController,
-              controller: _controller,
-              textTheme: textTheme,
-              isLastPage: _isLastPage,
-              )
+            pageController: _pageController,
+            controller: _controller,
+            textTheme: textTheme,
+            isLastPage: _isLastPage,
+          )
         ],
       ),
     );
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _pageController.dispose();
+    super.dispose();
+  }
 }
-
-
